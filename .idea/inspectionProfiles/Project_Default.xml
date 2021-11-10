@@ -5,11 +5,16 @@
       <option name="ignoredPackages">
         <value>
           <list size="1">
+<<<<<<< HEAD
             <item index="0" class="java.lang.String" itemvalue="psycopq2-binary" />
+=======
+            <item index="0" class="java.lang.String" itemvalue="Pillow" />
+>>>>>>> origin/jannet
           </list>
         </value>
       </option>
     </inspection_tool>
+<<<<<<< HEAD
     <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="ignoredErrors">
         <list>
@@ -25,5 +30,7 @@
         </list>
       </option>
     </inspection_tool>
+=======
+>>>>>>> origin/jannet
   </profile>
 </component>

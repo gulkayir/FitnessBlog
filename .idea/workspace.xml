@@ -5,7 +5,76 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="140a1c54-377b-4202-a442-054134c9dda5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/animate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/aos.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/feature_post.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/flaticon.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/font-awesome.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/liner_icon.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/magnific-popup.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/nice-select.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/owl.carousel.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/post_style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/search.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/slick.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/style.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/swiper.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/css/themify-icons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/Linearicons-Free.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/Linearicons-Free.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/Linearicons-Free.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/Linearicons-Free.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/Linearicons-Free.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/themify.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/themify.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/themify.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/fonts/themify.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/classie.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/contact.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/custom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/jquery-1.12.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/jquery.ajaxchimp.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/jquery.form.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/jquery.nice-select.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/jquery.validate.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/mail-script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/popper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/js/uisearch.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_all_post.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_banner.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_blog.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_blog_part.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_breadcrumb.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_button.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_category_post.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_common.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_contact.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_elements.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_extends.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_feature_post.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_footer.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_menu.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_mixins.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_portfolio.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_post_style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_single_blog.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_social_connect_part.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_subscribe_form.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/assets/sass/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/archive.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/category.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FitnessBlog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FitnessBlog.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
