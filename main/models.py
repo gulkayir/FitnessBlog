@@ -1,6 +1,7 @@
 from django.db import models
 
 from account.models import User
+
 class Category(models.Model):
     slug = models.SlugField(primary_key=True, max_length=50)
     name = models.CharField(max_length=55)
@@ -9,7 +10,7 @@ class Category(models.Model):
 
     def __str__(self):
         if self.parent:
-            return f'{self.name} --> {self.parent}'
+            return f'{self.parent}/{self.name}'
         return self.name
 
     @property
@@ -21,7 +22,6 @@ class Category(models.Model):
 class Article(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    cooking_time = models.PositiveIntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='articles')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
     created = models.DateTimeField()
@@ -29,12 +29,21 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def get_image(self):
+        return self.images.first()
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('detail', kwargs={'pk': self.pk})
+
 
 class Image(models.Model):
     image = models.ImageField(upload_to='articles', blank=True)
-    recipe = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='images')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='images')
 
     def __str__(self):
         if self.image:
             return self.image.url
         return ''
+
