@@ -45,6 +45,8 @@ class MainPageView(ListView):
     context_object_name = 'articles'
     paginate_by = 2
 
+
+
     def get_template_names(self):
         template_name = super(MainPageView, self).get_template_names()
         search = self.request.GET.get('q')
@@ -66,6 +68,7 @@ class MainPageView(ListView):
             context['articles'] = Article.objects.filter(created__gte=start_data)
         else:
             context['article'] = Article.objects.all()
+        context['categories'] = Category.objects.filter(parent__isnull=True)
         return context
 
 

@@ -138,11 +138,14 @@
                             <div class="sidebar_tittle">
                                 <h3>Categories</h3>
                             </div>
-                            <div class="single_catagory_item category">
-                                <ul class="list-unstyled">
-                                    <li><a href="category.html">Culture</a> <span>(15)</span> </li>
+                            <div class="category">
 
-                                </ul>
+                                <ul class="list-unstyled">
+									{% for category in categories  %}
+                                    	<li><a href="#"></a>{{ category }}<span>(15)</span> </li>
+                                	{% endfor %}
+								</ul>
+
                             </div>
                         </div>
                         <div class="single_sidebar_wiget">
@@ -189,6 +192,7 @@
             </div>
         </div>
     </div>
+
     <!-- subscribe form end-->
 
 
