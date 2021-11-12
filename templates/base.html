@@ -87,7 +87,6 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="breadcrumb_content text-right">
-                        <p>Home<span>/</span>contact us</p>
                     </div>
                 </div>
             </div>
@@ -142,7 +141,7 @@
 
                                 <ul class="list-unstyled">
 									{% for category in categories  %}
-                                    	<li><a href="#"></a>{{ category }}<span>(15)</span> </li>
+                                    	<li><a href="{% url 'category' category.slug %}">{{ category }}</a></li>
                                 	{% endfor %}
 								</ul>
 
