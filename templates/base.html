@@ -141,7 +141,7 @@
 
                                 <ul class="list-unstyled">
 									{% for category in categories  %}
-                                    	<li><a href="#"></a>{{ category }}<span>(15)</span> </li>
+                                    	<li><a href="{% url 'category' category.slug %}">{{ category }}</a></li>
                                 	{% endfor %}
 								</ul>
 

@@ -90,7 +90,7 @@ class CategoryDetailView(DetailView):
 
 class ArticleDetailView(DetailView):
     model = Article
-    template_name = 'elements.html'
+    template_name = 'single-article.html'
     context_object_name = 'article'
 
     def get_context_data(self, **kwargs):
