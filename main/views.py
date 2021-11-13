@@ -96,7 +96,7 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         image = self.get_object().get_image
-        context['images'] = self.get_object().images.exclude(id=image.id)
+        context['images'] = self.get_object().images.all()
         return context
 
 @login_required(login_url='login')
@@ -127,9 +127,7 @@ def update_article(request, pk):
         formset = ImageFormSet(request.POST or None, request.FILES or None, queryset=Image.objects.filter(article=article))
         if article_form.is_valid() and formset.is_valid():
             article = article_form.save()
-            print(formset, '2222')
             for form in formset:
-
                 image = form.save(commit=False)
                 image.recipe = article
                 image.save()
@@ -137,7 +135,6 @@ def update_article(request, pk):
         return render(request, 'update-article.html', locals())
     else:
         return HttpResponse('<h1>403 Forbidden</h1>')
-
 
 
 class DeleteArticleView( DeleteView):
@@ -153,4 +150,20 @@ class DeleteArticleView( DeleteView):
 
         return HttpResponseRedirect(success_url)
 
+
+# class SearchListView(ListView):
+#     model = Article
+#     template_name = 'search.html'
+#     context_object_name = 'results'
+#
+#     def get_queryset(self):
+#         queryset = super().get_queryset()
+#         print(self.request.GET)
+#         search_word = self.request.GET.get('q')
+#         if not search_word:
+#             queryset = Article.objects.none()
+#         else:
+#             queryset = Article.objects.filter(Q(title__icontains=search_word) | Q(description__icontains=search_word))
+#
+#         return queryset
 

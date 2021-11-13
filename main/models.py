@@ -20,6 +20,7 @@ class Category(models.Model):
         return False
 
 class Article(models.Model):
+
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='articles')
@@ -35,11 +36,11 @@ class Article(models.Model):
 
     def get_absolute_url(self):
         from django.urls import reverse
-        return reverse('detail', kwargs={'pk': self.pk})
+        return reverse('article-detail', kwargs={'pk': self.pk})
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='articles', blank=True)
+    image = models.ImageField(upload_to='articles', blank=True, null=True)
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='images')
 
     def __str__(self):
