@@ -10,4 +10,5 @@ urlpatterns = [
     path('add-article', add_article, name='add-article'),
     path('update-article/<int:pk>/', update_article, name='update-article'),
     path('delete-article/<int:pk>/', DeleteArticleView.as_view(), name='delete-article'),
+    # path('search', SearchListView.as_view(), name='search'),
 ]

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+            <section>
+                <h1>Add Post </h1>
+                    <div class="sidebar_widget">
+                        <div class="single_sidebar_wiget form_widget">
+                            <form method="post" enctype="multipart/form-data" >
+                            {{ form.as_p }}
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Sign Up</button>
+                        </form>
+
+                        </div>
+                    </div>
+            </section>
+
+{% endblock %}

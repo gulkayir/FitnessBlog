@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <section>
+                <h1>Add Post </h1>
+                    <div class="sidebar_widget">
+                        <div class="single_sidebar_wiget form_widget">
+                            <h1>Log-in</h1>
+                            <p>Please, use the following form to log-in:</p>
+                            <form action="." method="post">
+                                {{ form.as_p }}
+                                {% csrf_token %}
+                                <p><input type="submit" value="Log-in"></p>
+                            </form>
+                            </form>
+                        </div>
+                    </div>
+            </section>
+
+{% endblock %}
+
+
+

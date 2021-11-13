@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Add Post </h1>
 
+            <section>
+                <h1>Add Post </h1>
                     <div class="sidebar_widget">
                         <div class="single_sidebar_wiget form_widget">
                             <form method="post" enctype="multipart/form-data">
@@ -12,10 +13,13 @@
                                 {% for form in formset %}
                                 {{ form }}
                                 {% endfor %}
-                                <input class="btn btn-primary" type="submit" value="OK">
+<!--                                <a href="#" class="genric-btn default">Default</a>-->
+
+                                <input class="genric-btn primary" type="submit" value="Submit">
 
                             </form>
                         </div>
                     </div>
+            </section>
 
 {% endblock %}
