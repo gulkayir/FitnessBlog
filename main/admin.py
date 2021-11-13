@@ -8,7 +8,7 @@ class ImageInlineAdmin(admin.TabularInline):
     max_num = 5
 
 @admin.register(Article)
-class RecipeAdmin(admin.ModelAdmin):
+class ArticleAdmin(admin.ModelAdmin):
     inlines = [ImageInlineAdmin,]
 
 admin.site.register(Category)
