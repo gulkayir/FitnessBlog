@@ -30,7 +30,7 @@
 									<div class="row align-items-center">
 										<div class="col-lg-12">
 											<nav class="navbar navbar-expand-lg navbar-light">
-												<a class="navbar-brand" href="index.html"> <img src="{% static 'img/logo.jpeg' %}" alt="logo"> </a>
+												<a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'img/logo.jpeg' %}" alt="logo"> </a>
 												<button class="navbar-toggler" type="button" data-toggle="collapse"
 													data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 													aria-expanded="false" aria-label="Toggle navigation">
@@ -43,16 +43,31 @@
 														<li class="nav-item active">
 															<a class="nav-link" href="{% url 'home' %}">Home</a>
 														</li>
+														{% if request.user.is_authenticated  %}
 														<li class="nav-item active">
 															<a class="nav-link" href="{% url 'add-article' %}">Create my Own Post</a>
 														</li>
+														{% endif %}
 
 														<li class="nav-item">
 															<a class="nav-link" href="archive.html">Favorites</a>
 														</li>
-														<li class="nav-item">
-															<a class="nav-link" href="#"> Category</a>
-														</li>
+														{% if not request.user.is_authenticated %}
+															<li class="nav-item">
+																<a class="nav-link" href="{% url 'signup' %}"> Sign Up</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" href="{% url 'login' %}">Log In</a>
+															</li>
+														{% else %}
+															<li class="nav-item">
+																<a class="nav-link" href="#">{{ request.user.username }}</a>
+															</li>
+<!--															<h4>{{ request.user.username }}</h4>-->
+															<li class="nav-item">
+																<a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+															</li>
+														{% endif %}
 													</ul>
 												</div>
 
@@ -60,22 +75,27 @@
 													<ul>
 														<li>
 															<div id="wrap">
-																<form action="#" autocomplete="on">
-																	<input id="search" name="search" type="text" placeholder="Search here"><span class="ti-search"></span>
+																<form method="get" action="{% url 'home' %}" autocomplete="on">
+																	<input id="query" name="q" type="text" placeholder="Search here"><span class="ti-search"></span>
 																</form>
 															</div>
 														</li>
 														<li><a href="#" class="d-none d-lg-block"><i class="ti-facebook"></i></a></li>
 														<li><a href="#" class="d-none d-lg-block"><i class="ti-instagram"></i></a></li>
-<!--														put favorites here-->
-														<li><a href="#" class="d-none d-lg-block"><i class="ti-skype"></i></a></li>
+														{% if  request.user.is_authenticated %}
+														<li><a href="#" class="d-none d-lg-block"><i class="ti-face-smile"></i></a></li>
+														{% endif %}
+
 													</ul>
+
+
 												</div>
 											</nav>
 										</div>
 									</div>
 								</div>
 							</header>
+
 							<!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg align-items-center">
         <div class="container">
@@ -105,22 +125,27 @@
 						{% block content%} {% endblock %}
 
 
-                    </div>
+                  </div>
                     <div class="page_pageniation">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item disabled">
+                                    	<a class="page-link" href="{% url 'home' %}?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                {% endif %}
                                 <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
+                                    <a class="page-link" href="{% url 'home' %}">{{ page_obj.number }}</a>
                                 </li>
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{% url 'home' %}?page={{ page_obj.next_page_number }}" tabindex="+1">Next</a>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </nav>
                     </div>
+
                 </div>
                 <div class="col-lg-4">
                     <div class="sidebar_widget">
