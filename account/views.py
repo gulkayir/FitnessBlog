@@ -9,17 +9,17 @@ from .forms import RegistrationForm
 
 class RegisterView(SuccessMessageMixin, CreateView):
     model = User
-    template_name = 'account/registration.html'
+    template_name = 'registration/signup.html'
     form_class = RegistrationForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('')
     success_message = 'User registered successfully!'
 
 class SignInView(LoginView):
-    template_name = 'account/login.html'
-    success_url = reverse_lazy('home')
+    template_name = 'registration/login.html'
+    success_url = reverse_lazy('')
 
 def profile(request):
-    return render(request, 'account/profile.html')
+    return render(request, 'profile/myprofile.html')
 
 
 

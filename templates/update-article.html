@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section>
+                <h1>Add Post </h1>
+                    <div class="sidebar_widget">
+                        <div class="single_sidebar_wiget form_widget">
+                            <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ article_form.as_p }}
+                            {{ formset.management_form }}
+                            {% for form in formset %}
+                            {{ form }}
+                            {% endfor %}
+                                <input class="genric-btn primary" type="submit" value="Submit">
+                        </form>
+                        </div>
+                    </div>
+            </section>
+
+{% endblock %}

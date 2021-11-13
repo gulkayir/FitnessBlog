@@ -12,49 +12,41 @@ git {% extends 'base.html' %}
             <div class="col-lg-8 posts-list">
                <div class="single-post">
                   <div class="feature-img">
-                     <img class="img-fluid" src="img/blog/single_blog_1.png" alt="">
+                     <img class="img-fluid" src="{{ article.get_image }}}" alt="">
                   </div>
                   <div class="blog_details">
-                     <h2>Second divided from form fish beast made every of seas
-                        all gathered us saying he our
+                     <h2>{{ article.title }}
                      </h2>
                      <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
+                        <li><a href="#"><i class="far fa-user"></i> {{ article.category.name }}</a></li>
                         <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
                      </ul>
-                     <p class="excert">
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower
+                     <p class="excert">{{ article.description }}
                      </p>
                      <p>
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower to actually sit through a
-                        self-imposed MCSE training. who has the willpower to actually
                      </p>
                      <div class="quote-wrapper">
                         <div class="quotes">
-                           MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                           should have to spend money on boot camp when you can get the MCSE study materials yourself at
-                           a fraction of the camp price. However, who has the willpower to actually sit through a
-                           self-imposed MCSE training.
+                          {{ article.description | truncatewords:10 }}
                         </div>
                      </div>
                      <p>
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower
+
                      </p>
                      <p>
-                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you
-                        should have to spend money on boot camp when you can get the MCSE study materials yourself at a
-                        fraction of the camp price. However, who has the willpower to actually sit through a
-                        self-imposed MCSE training. who has the willpower to actually
+
                      </p>
                   </div>
                </div>
                <div class="navigation-top">
+                  <div class="blog-author">
+                     <div class="media align-items-center">
+                        <div class="media-body">
+                           <h2><a href="{% url 'delete-article' article.id %}" class="d-lg-block"><i class="ti-trash"></i></a></h2>
+                           <h2><a href="{% url 'update-article' article.id %}" class="d-lg-block"><i class="ti-pencil"></i></a></h2>
+                        </div>
+                     </div>
+                  </div>
                   <div class="d-sm-flex justify-content-between text-center">
                      <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and 4
                         people like this</p>
@@ -107,13 +99,14 @@ git {% extends 'base.html' %}
                </div>
                <div class="blog-author">
                   <div class="media align-items-center">
-                     <img src="img/blog/author.png" alt="">
+                     {% if user.image %}
+                     <img src="{{ user.image.url }}" alt="">
+                     {% endif %}
                      <div class="media-body">
                         <a href="#">
-                           <h4>Harvard milan</h4>
+                           <h4>{{ user.first_name }} {{ user.last_name }}</h4>
                         </a>
-                        <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he
-                           our dominion twon Second divided from</p>
+                        <p>{{ user.email }}</p>
                      </div>
                   </div>
                </div>
@@ -232,6 +225,8 @@ git {% extends 'base.html' %}
             </div>
          </div>
       </div>
+
+
    </section>
    <!--================Blog Area end =================-->
 
