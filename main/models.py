@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields.related import ForeignKey
 
 from account.models import User
 
@@ -20,12 +21,16 @@ class Category(models.Model):
         return False
 
 class Article(models.Model):
-
     title = models.CharField(max_length=255)
     description = models.TextField()
+    # image = models.ImageField(blank=True, upload_to='articles')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='articles')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
     created = models.DateTimeField()
+    likes = models.ManyToManyField(User)
+
+    def total_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return self.title
@@ -48,3 +53,14 @@ class Image(models.Model):
             return self.image.url
         return ''
 
+
+class Comment(models.Model):
+    user = models.CharField(max_length=155)
+    article = models.ForeignKey('Article',on_delete=models.CASCADE,related_name='comments')
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return f'{self.user.username}'

@@ -1,8 +1,10 @@
 from datetime import datetime
 
 from django import forms
+from django.db import models
+from django.db.models import fields
 
-from .models import Article, Image
+from .models import Article, Image, Comment
 
 
 class ArticleForm(forms.ModelForm):
@@ -18,5 +20,7 @@ class ImageForm(forms.ModelForm):
         model = Image
         fields = ('image', )
 
-class SearchForm(forms.Form):
-    query = forms.CharField()
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)

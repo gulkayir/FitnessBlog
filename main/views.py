@@ -2,15 +2,19 @@ from datetime import timedelta
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.db.models.expressions import F
 from django.forms import modelformset_factory
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, request
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.urls.base import reverse
 from django.utils import timezone
+from django.utils.translation import templatize
 from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic.edit import CreateView
 
-from .forms import ArticleForm, ImageForm
+from .forms import ArticleForm, CommentForm, ImageForm
 from .models import *
 # from .permissions import UserHasPermissionMixin
 
@@ -30,6 +34,12 @@ from .models import *
 #     images = recipe.images.exclude(id=image.id)
 #     return render(request, 'recipe-detail.html', locals())
 
+# def recipe_detail(request, pk):
+#     recipe = get_object_or_404(Recipe, pk=pk)
+#     image = recipe.get_image
+#     images = recipe.images.exclude(id=image.id)
+#     return render(request, 'recipe-detail.html', locals())
+
 # def delete_recipe(request, pk):
 #     recipe = get_object_or_404(Recipe, pk=pk)
 #     if request.method == 'POST':
@@ -37,6 +47,11 @@ from .models import *
 #         messages.add_message(request, messages.SUCCESS, 'Successfully deleted recipe')
 #         return redirect('home')
 #     return render(request, 'delete-recipe.html')
+
+# class ArticleDetailView(DetailView):
+#     model = Article
+#     template_name = 'single-article.html'
+#     context_object_name = 'article'
 
 
 class MainPageView(ListView):
@@ -69,6 +84,7 @@ class MainPageView(ListView):
         else:
             context['article'] = Article.objects.all()
         context['categories'] = Category.objects.filter(parent__isnull=True)
+        context['comment'] = Comment.objects.all()
         return context
 
 
@@ -88,16 +104,20 @@ class CategoryDetailView(DetailView):
         return context
 
 
-class ArticleDetailView(DetailView):
-    model = Article
-    template_name = 'single-article.html'
-    context_object_name = 'article'
+def article_detail(request, pk):
+    article = get_object_or_404(Article, pk=pk)
+    image = article.get_image
+    images = article.images.exclude(id=image.id)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        image = self.get_object().get_image
-        context['images'] = self.get_object().images.all()
-        return context
+    if request.method == 'POST':
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.article = article
+            new_comment.save()
+        else:
+            comment_form = CommentForm()
+    return render(request, 'single-article.html', locals())
 
 @login_required(login_url='login')
 def add_article(request):
@@ -150,20 +170,13 @@ class DeleteArticleView( DeleteView):
 
         return HttpResponseRedirect(success_url)
 
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'single-post.html'
 
-# class SearchListView(ListView):
-#     model = Article
-#     template_name = 'search.html'
-#     context_object_name = 'results'
-#
-#     def get_queryset(self):
-#         queryset = super().get_queryset()
-#         print(self.request.GET)
-#         search_word = self.request.GET.get('q')
-#         if not search_word:
-#             queryset = Article.objects.none()
-#         else:
-#             queryset = Article.objects.filter(Q(title__icontains=search_word) | Q(description__icontains=search_word))
-#
-#         return queryset
+    def form_valid(self, form):
+        form.instance.article_id = self.kwargs['pk']
+        return super().form_valid(form)
 
+    success_url = reverse_lazy('article-detail')
