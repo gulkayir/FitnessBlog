@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.fields.related import ForeignKey
+from django.urls import reverse
 
 from account.models import User
 
@@ -20,31 +22,40 @@ class Category(models.Model):
         return False
 
 class Article(models.Model):
-
     title = models.CharField(max_length=255)
     description = models.TextField()
+    image = models.ImageField(blank=True, upload_to='images')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='articles')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
     created = models.DateTimeField()
+    likes = models.ManyToManyField(User)
 
     def __str__(self):
         return self.title
 
-    @property
-    def get_image(self):
-        return self.images.first()
-
     def get_absolute_url(self):
-        from django.urls import reverse
-        return reverse('article-detail', kwargs={'pk': self.pk})
+        return reverse('article-detail', kwargs={
+            'pk':self.pk
+        })
+    
+    @property
+    def get_comments(self):
+        return self.comments.all().order_by('-timestamp')
 
 
-class Image(models.Model):
-    image = models.ImageField(upload_to='articles', blank=True, null=True)
-    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='images')
+
+
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
+    #name = models.CharField(max_length=80)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    #email = models.EmailField()
+    content = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['created_on']
 
     def __str__(self):
-        if self.image:
-            return self.image.url
-        return ''
-
+        return 'Comment {} by {}'.format(self.content, self.author)

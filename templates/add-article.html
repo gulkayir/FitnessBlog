@@ -9,11 +9,8 @@
                             <form method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{ article_form.as_p }}
-                                {{ formset.management_form }}
-                                {% for form in formset %}
                                 {{ form }}
                                 {% endfor %}
-<!--                                <a href="#" class="genric-btn default">Default</a>-->
 
                                 <input class="genric-btn primary" type="submit" value="Submit">
 
