@@ -88,6 +88,8 @@ class CategoryDetailView(DetailView):
         return context
 
 
+
+
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'single-article.html'
@@ -97,7 +99,10 @@ class ArticleDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         image = self.get_object().get_image
         context['images'] = self.get_object().images.all()
+
         return context
+
+
 
 @login_required(login_url='login')
 def add_article(request):

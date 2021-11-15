@@ -2,6 +2,8 @@ from django.db import models
 
 from account.models import User
 
+
+
 class Category(models.Model):
     slug = models.SlugField(primary_key=True, max_length=50)
     name = models.CharField(max_length=55)
@@ -27,8 +29,11 @@ class Article(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
     created = models.DateTimeField()
 
+
+
     def __str__(self):
         return self.title
+
 
     @property
     def get_image(self):
@@ -47,4 +52,23 @@ class Image(models.Model):
         if self.image:
             return self.image.url
         return ''
+
+class Comment(models.Model):
+    name = models.CharField(max_lenght=50)
+    email = models.EmailField(max_lenght=100)
+    content = models.TextField()
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-created', )
+
+    def __str__(self):
+        return f'Comment by {self.name}'
+
+
+
+
+
+
 
