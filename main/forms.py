@@ -16,17 +16,15 @@ class ArticleForm(forms.ModelForm):
         exclude = ('user',)
 
 
-<<<<<<< HEAD
 class SearchForm(forms.Form):
     query = forms.CharField()
 
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('name', 'email','content')
-=======
+        fields = ('author', 'content')
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content',)
->>>>>>> ed8a8747dde4ec6fc09406bf6a96e5408cc780a8
+

@@ -104,15 +104,12 @@ class CategoryDetailView(DetailView):
         return context
 
 
-<<<<<<< HEAD
 
 
 class ArticleDetailView(DetailView):
     model = Article
-=======
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
->>>>>>> ed8a8747dde4ec6fc09406bf6a96e5408cc780a8
     template_name = 'single-article.html'
     comments = article.comments.filter(active=True)
     new_comment = None
@@ -131,15 +128,12 @@ def article_detail(request, pk):
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
 
-<<<<<<< HEAD
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         image = self.get_object().get_image
         context['images'] = self.get_object().images.all()
 
         return context
-=======
->>>>>>> ed8a8747dde4ec6fc09406bf6a96e5408cc780a8
 
 
 

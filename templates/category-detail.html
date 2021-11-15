@@ -46,7 +46,9 @@
                             <div class="single_post post_1 feature_post">
                                 {% for article in articles %}
                                 <div class="single_post_img">
-                                    <img src="{{ article.get_image }}" alt="">
+                                    {% if article.image %}
+                                    <img src="{{ article.image.url }}" alt="">
+                                    {% endif %}
                                 </div>
                                 <div class="single_post_text text-center">
                                     <a href="{% url 'category' category.slug %}"><h5>{{ category.parent}} / {{ category.name }}</h5></a>
