@@ -1,40 +1,50 @@
-git {% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        {% if article.user == user %}
+        <div class="float-right">
+          <a href="{% url 'update-article' article.id %}" class="btn btn-success btn-sm mt-1 mb-1">Update</a>
+          <a href="{% url 'delete-article' article.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
+        </div>
+        {% endif %}
+        {% if article.image %}
+          <img class="post-image" src="{{ article.image.url }}">
+          <hr>
+        {% endif %}
+        <p class="card-text ">{{ article.description}}</p>
 
+      </div>
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        <!-- comments -->
+        {% with comments.count as total_comments %}
+        <h4 class="">{{ total_comments }} Comments</h4>
+        <hr>
 
-   <!--================Blog Area =================-->
-   <section class="blog_area single-post-area all_post section_padding">
-      <div class="container">
-         <div class="row">
-            <div class="col-lg-8 posts-list">
-               <div class="single-post">
-                  <div class="feature-img">
-                     <img class="img-fluid" src="{{ article.get_image }}}" alt="">
-                  </div>
-                  <div class="blog_details">
-                     <h2>{{ article.title }}
-                     </h2>
-                     <ul class="blog-info-link mt-3 mb-4">
-                        <li><a href="#"><i class="far fa-user"></i> {{ article.category.name }}</a></li>
-                        <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
-                     </ul>
-                     <p class="excert">{{ article.description }}
-                     </p>
-                     <p>
-                     </p>
-                     <div class="quote-wrapper">
-                        <div class="quotes">
-                          {{ article.description | truncatewords:10 }}
-                        </div>
-                     </div>
-                     <p>
+        <p>
+          {% endwith %} {% for comment in comments %}
+        </p>
 
-                     </p>
-                     <p>
+        <div class="comments" style="padding: 10px;">
+          <p class="font-weight-bold">
+            Username: {{ comment.author }}
+            <br>
+            <span class=" text-muted font-weight-normal">
+              Created on: {{ comment.created_on|date:"F d, Y" }}
+            </span>
+          </p>
+          {{ comment.content | linebreaks }}
+        </div>
+        <hr>
 
+<<<<<<< HEAD
                      </p>
                   </div>
                </div>
@@ -223,11 +233,31 @@ git {% extends 'base.html' %}
                </div>
             </div>
          </div>
+=======
+        {% endfor %}
+>>>>>>> ed8a8747dde4ec6fc09406bf6a96e5408cc780a8
       </div>
+    </div>
 
+    {% if user.is_authenticated %}
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        {% if new_comment %}
+        <div class="alert alert-success" role="alert">
+          Your comment added
+        </div>
+        {% else %}
+        <h3>Leave a comment</h3>
+        <form method="post" style="margin-top: 1.3em;">
+          {{ comment_form.as_p }}
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline-danger">Submit</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
 
-   </section>
-   <!--================Blog Area end =================-->
-
-
-{% endblock %}
+{% endblock content %}
