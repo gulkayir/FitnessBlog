@@ -31,8 +31,11 @@ class Article(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles')
     created = models.DateTimeField()
     likes = models.ManyToManyField(User, blank=True)
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> a6cf62431e039318c15f860937d6b06b39fb8d5d
 
     def __str__(self):
         return self.title

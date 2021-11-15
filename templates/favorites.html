@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Your favourites </h1>
+<section class="all_post section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="single_post post_1 feature_post">
+                                {% for article in user_favourites%}
+                                <div class="single_post_img">
+                                    <img src="{{ article.image.url }}" alt="">
+                                </div>
+                                <div class="single_post_text text-center">
+                                    <h3><a href="{% url 'article-detail' article.id %}" >{{ article.title }}</a></h3>
+                                    <p>{{ article.created}}</p>
+                                    <ul class="actions">
+                                        <a href="{% url 'article-detail' article.id %}" class="genric-btn primary-border">More</a>
+                                    </ul>
+                                </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+</section>
+
+{% endblock %}

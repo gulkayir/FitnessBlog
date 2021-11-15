@@ -13,45 +13,10 @@ from django.utils import timezone
 from django.utils.translation import templatize
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .forms import ArticleForm, CommentForm
 from .models import *
-# from .permissions import UserHasPermissionMixin
-
-
-# def index(request):
-#     recipes = Recipe.objects.all()
-#     return render(request, 'index.html', locals())
-
-# def category_detail(request, slug):
-#     category = Category.objects.get(slug=slug)
-#     recipes = Recipe.objects.filter(category_id=slug)
-#     return render(request, 'category-detail.html', locals())
-
-# def recipe_detail(request, pk):
-#     recipe = get_object_or_404(Recipe, pk=pk)
-#     image = recipe.get_image
-#     images = recipe.images.exclude(id=image.id)
-#     return render(request, 'recipe-detail.html', locals())
-
-# def recipe_detail(request, pk):
-#     recipe = get_object_or_404(Recipe, pk=pk)
-#     image = recipe.get_image
-#     images = recipe.images.exclude(id=image.id)
-#     return render(request, 'recipe-detail.html', locals())
-
-# def delete_recipe(request, pk):
-#     recipe = get_object_or_404(Recipe, pk=pk)
-#     if request.method == 'POST':
-#         recipe.delete()
-#         messages.add_message(request, messages.SUCCESS, 'Successfully deleted recipe')
-#         return redirect('home')
-#     return render(request, 'delete-recipe.html')
-
-# class ArticleDetailView(DetailView):
-#     model = Article
-#     template_name = 'single-article.html'
-#     context_object_name = 'article'
 
 
 class MainPageView(ListView):
@@ -69,7 +34,7 @@ class MainPageView(ListView):
         if search:
             template_name = 'search.html'
         elif filter:
-            template_name = 'filtered.html'
+            template_name = 'new.html'
         return template_name
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -92,6 +57,7 @@ class CategoryDetailView(DetailView):
     model = Category
     template_name = 'category-detail.html'
     context_object_name = 'category'
+    paginate_by = 3
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -176,3 +142,17 @@ class DeleteArticleView( DeleteView):
 
         return HttpResponseRedirect(success_url)
 
+
+def like_or_unlike(request,pk):
+    article = Article.objects.get(pk=pk)
+    if request.user in article.likes.all():
+        article.likes.remove(request.user)
+    else:
+        article.likes.add(request.user)
+    return redirect(article.get_absolute_url())
+
+
+def user_favourites(request):
+    user_favourites = Article.objects.filter(likes=request.user)
+
+    return render(request, 'favorites.html', locals())
