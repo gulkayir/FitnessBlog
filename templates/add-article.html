@@ -9,8 +9,6 @@
                             <form method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{ article_form.as_p }}
-                                {{ formset.management_form }}
-                                {% for form in formset %}
                                 {{ form }}
                                 {% endfor %}
 

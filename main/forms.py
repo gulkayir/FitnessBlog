@@ -4,7 +4,7 @@ from django import forms
 from django.db import models
 from django.db.models import fields
 
-from .models import Article, Image, Comment
+from .models import Article, Comment
 
 
 class ArticleForm(forms.ModelForm):
@@ -15,10 +15,6 @@ class ArticleForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('user',)
 
-class ImageForm(forms.ModelForm):
-    class Meta:
-        model = Image
-        fields = ('image', )
 
 class CommentForm(forms.ModelForm):
     class Meta:
