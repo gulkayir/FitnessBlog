@@ -3,7 +3,7 @@
 {% block content %}
                <div class="single-post">
                   <div class="feature-img">
-                     <img class="img-fluid" style="width: 500px; height: auto;" src="{% static 'img/home.jpeg' %}" alt="">
+                     <img class="img-fluid" style="width: 500px; height: auto;" src="{% static 'img/homeimage.png' %}" alt="">
                   </div>
                   <div class="blog_details">
                      <h2>About our fitness blog
@@ -39,7 +39,19 @@
                         self-imposed MCSE training. who has the willpower to actually
                      </p>
                   </div>
-               </div>
+                   </div>
+    {% if is_paginated %}
+      <nav aria-label="Page navigation conatiner"></nav>
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link text-danger">&laquo; PREV PAGE </a></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link text-danger"> NEXT PAGE &raquo;</a></li>
 
-
+        {% endif %}
+      </ul>
+      </nav>
+    </div>
+{% endif %}
 {% endblock %}

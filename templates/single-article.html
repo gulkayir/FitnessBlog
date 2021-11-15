@@ -3,32 +3,62 @@
 {% block content %}
 
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top">
-      <div class="card-body">
-        {% if article.user == user %}
-        <div class="float-right">
-          <a href="{% url 'update-article' article.id %}" class="btn btn-success btn-sm mt-1 mb-1">Update</a>
-          <a href="{% url 'delete-article' article.id %}" class="btn btn-danger btn-sm mt-1 mb-1">Delete</a>
-        </div>
-        {% endif %}
-        {% if article.image %}
-          <img class="post-image" src="{{ article.image.url }}">
-          <hr>
-        {% endif %}
-        <p class="card-text ">{{ article.description}}</p>
 
-      </div>
-    </div>
-    <div class="col-md-8 card mb-4  mt-3 ">
-      <div class="card-body">
-        <!-- comments -->
-        {% with comments.count as total_comments %}
-        <h4 class="">{{ total_comments }} Comments</h4>
-        <hr>
 
-        <p>
+<div class="col-lg-8 posts-list">
+               <div class="single-post">
+                  <div class="feature-img">
+                    {% if article.image %}
+                        <img class="post-image" style="width: 500px; height: auto" src="{{ article.image.url }}">
+                        <hr>
+                      {% endif %}
+                  </div>
+                  <div class="blog_details">
+                     <h2>
+                     <h2>{{ article.title }}
+                     </h2>
+                     <ul class="blog-info-link mt-3 mb-4">
+                        <li><a href="#"><i class="far fa-user"></i> {{ article.category.name }}</a></li>
+                       {% with comments.count as total_comments %}
+                        <li><a href="#"><i class="far fa-comments"></i>{{ total_comments }} Comments</a></li>
+                     </ul>
+                     <p class="excert">{{ article.description }}
+                     </p>
+                  </div>
+               </div>
+               <div class="navigation-top">
+                  <div class="blog-author">
+                     <div class="media align-items-center">
+                        <div class="media-body">
+                            {% if article.user == user %}
+                           <h2><a href="{% url 'delete-article' article.id %}" class="d-lg-block"><i class="ti-trash"></i></a></h2>
+                           <h2><a href="{% url 'update-article' article.id %}" class="d-lg-block"><i class="ti-pencil"></i></a></h2>
+                             {% endif %}
+                            {% if not request.user in article.like %}
+                            <h2><a href="{% url 'like' article.id %}" class="d-lg-block"><i class="ti-bookmark"></i></a>Added</h2>
+                            {% endif%}
+
+                        </div>
+                     </div>
+                  </div>
+                  <div class="d-sm-flex justify-content-between text-center">
+                     <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and 4
+                        people like this</p>
+               </div>
+               <div class="blog-author">
+                  <div class="media align-items-center">
+                     <img src="img/blog/author.png" alt="">
+                     {% if user.image %}
+                     <img src="{{ user.image.url }}" alt="">
+                     {% endif %}
+                     <div class="media-body">
+                        <a href="#">
+                           <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                        </a>
+                        <p>{{ user.email }}</p>
+                     </div>
+                  </div>
+                 <p>
           {% endwith %} {% for comment in comments %}
         </p>
 
@@ -45,28 +75,31 @@
         <hr>
 
         {% endfor %}
+               </div>
+                <h4>Leave a Reply</h4>
+                 {% if user.is_authenticated %}
+                  <div class="col-md-8 card mb-4  mt-3 ">
+                    <div class="card-body">
+                      {% if new_comment %}
+                      <div class="alert alert-success" role="alert">
+                        Your comment is added
+                      </div>
+                      {% else %}
+                      <h3>Leave a comment</h3>
+                      <form method="post" style="margin-top: 1.3em;">
+                        {{ comment_form.as_p  }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger">Submit</button>
+                      </form>
+                      {% endif %}
+                    </div>
+                  </div>
+                  {% endif %}
+            </div>
+         </div>
       </div>
-    </div>
 
-    {% if user.is_authenticated %}
-    <div class="col-md-8 card mb-4  mt-3 ">
-      <div class="card-body">
-        {% if new_comment %}
-        <div class="alert alert-success" role="alert">
-          Your comment added
-        </div>
-        {% else %}
-        <h3>Leave a comment</h3>
-        <form method="post" style="margin-top: 1.3em;">
-          {{ comment_form.as_p }}
-          {% csrf_token %}
-          <button type="submit" class="btn btn-outline-danger">Submit</button>
-        </form>
-        {% endif %}
-      </div>
-    </div>
-    {% endif %}
-  </div>
-</div>
 
-{% endblock content %}
+   </section>
+   <!--================Blog Area end =================-->
+{% endblock %}
