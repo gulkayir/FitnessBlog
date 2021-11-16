@@ -70,6 +70,10 @@ class CategoryDetailView(DetailView):
         return context
 
 
+
+
+class ArticleDetailView(DetailView):
+    model = Article
 def article_detail(request, pk):
     article = get_object_or_404(Article, pk=pk)
     template_name = 'single-article.html'
@@ -89,6 +93,14 @@ def article_detail(request, pk):
                                            'comments': comments,
                                            'new_comment': new_comment,
                                            'comment_form': comment_form})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        image = self.get_object().get_image
+        context['images'] = self.get_object().images.all()
+
+        return context
+
 
 
 @login_required(login_url='login')
