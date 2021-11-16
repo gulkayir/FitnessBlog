@@ -11,7 +11,6 @@
                 <div class="col-lg-8">
                     <div class="row">
                         <div class="col-lg-12">
-
                                 <div class="single_post post_1 feature_post">
                                         <span class="image object">
                                             <img style="width: 600px; height: auto;" src="{{ category.image.url }}"  alt="" />
@@ -38,13 +37,14 @@
         </div>
 
    <section class="all_post section_padding">
+       {% for article in articles %}
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="single_post post_1 feature_post">
-                                {% for article in articles %}
+
                                 <div class="single_post_img">
                                     <img style="width: 500px; height: auto;" src="{{ article.image.url }}" alt="">
                                 </div>
@@ -54,12 +54,20 @@
 
 <!--                                    <a href="{% url 'article-detail' article.id %}"><h2>{{ article.description | truncatewords:10 }}</h2></a>-->
                                     <p> Posted on {{ article.created}}</p>
+                                    {% if article.image %}
+                                    <img src="{{ article.image.url }}" alt="">
+                                    {% endif %}
+                                </div>
+                                <div class="single_post_text text-center">
+                                    <a href="{% url 'category' category.slug %}"><h5>{{ category.parent}} / {{ category.name }}</h5></a>
+                                    <h3><a href="{% url 'article-detail' article.id %}" >{{ article.description | truncatewords:10 }}</a></h3>
+                                    <p>{{ article.created}}</p>
                                     <ul class="actions">
                                         <a href="{% url 'article-detail' article.id %}" class="genric-btn primary-border">More</a>
 								    </ul>
                                 </div>
 
-                                {% endfor %}
+
                             </div>
                         </div>
 
@@ -69,7 +77,10 @@
                 </div>
             </div>
         </div>
+       {% endfor %}
     </section>
+
+
  {% if is_paginated %}
   <ul class="pagination">
     {% if page_obj.has_previous %}

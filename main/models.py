@@ -4,6 +4,8 @@ from django.urls import reverse
 
 from account.models import User
 
+
+
 class Category(models.Model):
     slug = models.SlugField(primary_key=True, max_length=50)
     name = models.CharField(max_length=55)
@@ -30,8 +32,10 @@ class Article(models.Model):
     created = models.DateTimeField()
     likes = models.ManyToManyField(User, blank=True)
 
+
     def __str__(self):
         return self.title
+
 
     def get_absolute_url(self):
         return reverse('article-detail', kwargs={
@@ -54,6 +58,12 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['created_on']
+
+
+
+
+
+
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.content, self.author)
