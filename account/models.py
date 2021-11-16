@@ -4,7 +4,8 @@ from django.db import models
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=150)
-    image = models.ImageField(upload_to='users')
+    image = models.ImageField(upload_to='users', default='img/defaultuser.jpeg')
+    short_bio = models.CharField(max_length=255, blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

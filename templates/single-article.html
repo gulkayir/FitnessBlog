@@ -35,15 +35,14 @@
                            <h2><a href="{% url 'update-article' article.id %}" class="d-lg-block"><i class="ti-pencil"></i></a></h2>
                              {% endif %}
                             {% if not request.user in article.like %}
-                            <h2><a href="{% url 'like' article.id %}" class="d-lg-block"><i class="ti-bookmark"></i></a>Added</h2>
+                            <h2><a href="{% url 'like' article.id %}" class="d-lg-block"><i class="ti-bookmark"></i></a></h2>
                             {% endif%}
 
                         </div>
                      </div>
                   </div>
                   <div class="d-sm-flex justify-content-between text-center">
-                     <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and 4
-                        people like this</p>
+                     <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span></p>
                </div>
                <div class="blog-author">
                   <div class="media align-items-center">
@@ -79,20 +78,18 @@
                 <h4>Leave a Reply</h4>
                  {% if user.is_authenticated %}
                   <div class="col-md-8 card mb-4  mt-3 ">
-                    <div class="card-body">
                       {% if new_comment %}
-                      <div class="alert alert-success" role="alert">
-                        Your comment is added
-                      </div>
+                          <div class="alert alert-success" role="alert">
+                            Your comment is added
+                          </div>
                       {% else %}
-                      <h3>Leave a comment</h3>
                       <form method="post" style="margin-top: 1.3em;">
                         {{ comment_form.as_p  }}
                         {% csrf_token %}
                         <button type="submit" class="btn btn-outline-danger">Submit</button>
                       </form>
                       {% endif %}
-                    </div>
+
                   </div>
                   {% endif %}
             </div>

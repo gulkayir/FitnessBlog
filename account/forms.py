@@ -35,3 +35,17 @@ class RegistrationForm(forms.ModelForm):
     def save(self, commit=True):
         user = User.objects.create_user(**self.cleaned_data)
         return user
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['image']
+

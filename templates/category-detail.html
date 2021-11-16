@@ -46,14 +46,14 @@
                             <div class="single_post post_1 feature_post">
                                 {% for article in articles %}
                                 <div class="single_post_img">
-                                    <img src="{{ article.image.url }}" alt="">
+                                    <img style="width: 500px; height: auto;" src="{{ article.image.url }}" alt="">
                                 </div>
                                 <div class="single_post_text text-center">
                                     <a href="{% url 'category' category.slug %}"><h5>{{ category.parent}} / {{ category.name }}</h5></a>
-                                    <h3><a href="{% url 'article-detail' article.id %}" >{{ article.description | truncatewords:10 }}</a></h3>
+                                    <h3><a href="{% url 'article-detail' article.id %}" >{{ article.title | truncatewords:10 }}</a></h3>
 
 <!--                                    <a href="{% url 'article-detail' article.id %}"><h2>{{ article.description | truncatewords:10 }}</h2></a>-->
-                                    <p>{{ article.created}}</p>
+                                    <p> Posted on {{ article.created}}</p>
                                     <ul class="actions">
                                         <a href="{% url 'article-detail' article.id %}" class="genric-btn primary-border">More</a>
 								    </ul>
