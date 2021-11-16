@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -30,22 +30,16 @@ class MainPageView(ListView):
     def get_template_names(self):
         template_name = super(MainPageView, self).get_template_names()
         search = self.request.GET.get('q')
-        filter = self.request.GET.get('filter')
         if search:
             template_name = 'search.html'
-        elif filter:
-            template_name = 'new.html'
+
         return template_name
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(MainPageView, self).get_context_data(**kwargs)
         search = self.request.GET.get('q')
-        filter = self.request.GET.get('filter')
         if search:
             context['articles'] = Article.objects.filter(Q(title__icontains=search)|Q(description__icontains=search))
-        elif filter:
-            start_data = timezone.now() - timedelta(days=1)
-            context['articles'] = Article.objects.filter(created__gte=start_data)
         else:
             context['article'] = Article.objects.all()
         context['categories'] = Category.objects.filter(parent__isnull=True)
@@ -154,5 +148,24 @@ def like_or_unlike(request,pk):
 
 def user_favourites(request):
     user_favourites = Article.objects.filter(likes=request.user)
+    paginator = Paginator(user_favourites, 2)
 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, 'favorites.html', locals())
+
+
+class SearchView(ListView):
+    model = Article
+    template_name = 'new.html'
+    context_object_name = 'articles'
+    paginate_by = 4
+
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        time_threshold = datetime.now(timezone.utc) - timedelta(days=1)
+        context['articles'] = Article.objects.filter(created__lte=time_threshold)
+        return context
+
+

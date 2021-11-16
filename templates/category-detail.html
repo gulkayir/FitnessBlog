@@ -46,6 +46,14 @@
                             <div class="single_post post_1 feature_post">
 
                                 <div class="single_post_img">
+                                    <img style="width: 500px; height: auto;" src="{{ article.image.url }}" alt="">
+                                </div>
+                                <div class="single_post_text text-center">
+                                    <a href="{% url 'category' category.slug %}"><h5>{{ category.parent}} / {{ category.name }}</h5></a>
+                                    <h3><a href="{% url 'article-detail' article.id %}" >{{ article.title | truncatewords:10 }}</a></h3>
+
+<!--                                    <a href="{% url 'article-detail' article.id %}"><h2>{{ article.description | truncatewords:10 }}</h2></a>-->
+                                    <p> Posted on {{ article.created}}</p>
                                     {% if article.image %}
                                     <img src="{{ article.image.url }}" alt="">
                                     {% endif %}
