@@ -36,5 +36,5 @@ def profile(request):
             return redirect('profile')
     u_form = UserUpdateForm(instance=request.user)
     p_form = ProfileUpdateForm(instance=request.user)
-    return render(request,'profile.html', { 'u_form':u_form, 'p_form':p_form })
+    return render(request,'profile/profile.html', { 'u_form':u_form, 'p_form':p_form })
 
