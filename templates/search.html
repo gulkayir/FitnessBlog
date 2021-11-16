@@ -16,7 +16,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="single_post_text text-center">
-                                    <h3><a href="{% url 'article-detail' article.id %}" >{{ article.description | truncatewords:10 }}</a></h3>
+                                    <h3><a href="{% url 'article-detail' article.id %}" >{{ article.title }}</a></h3>
                                     <p>{{ article.created}}</p>
                                     <ul class="actions">
                                         <a href="{% url 'article-detail' article.id %}" class="genric-btn primary-border">More</a>
