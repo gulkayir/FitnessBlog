@@ -44,7 +44,8 @@
 															<a class="nav-link" href="{% url 'home' %}">Home</a>
 														</li>
 														<li class="nav-item">
-															<a class="nav-link" href="#">New Articles</a>
+															<a class="nav-link" href="{% url 'new' %}">New Articles</a>
+
 														</li>
 														{% if request.user.is_authenticated  %}
 														<li class="nav-item active">
@@ -65,7 +66,7 @@
 															</li>
 														{% else %}
 															<li class="nav-item">
-																<a class="nav-link" href="#">{{ request.user.username }}</a>
+																<a class="nav-link" href="{% url 'profile' %}">{{ request.user.username }}</a>
 															</li>
 <!--															<h4>{{ request.user.username }}</h4>-->
 															<li class="nav-item">
@@ -84,11 +85,6 @@
 																</form>
 															</div>
 														</li>
-														<li><a href="#" class="d-none d-lg-block"><i class="ti-facebook"></i></a></li>
-														<li><a href="#" class="d-none d-lg-block"><i class="ti-instagram"></i></a></li>
-														{% if  request.user.is_authenticated %}
-														<li><a href="#" class="d-none d-lg-block"><i class="ti-face-smile"></i></a></li>
-														{% endif %}
 
 													</ul>
 
@@ -130,35 +126,10 @@
 
 
                   </div>
-                    <div class="page_pageniation">
-                        {% if is_paginated %}
-							  <nav aria-label="Page navigation conatiner"></nav>
-							  <ul class="pagination justify-content-center">
-								{% if page_obj.has_previous %}
-								<li><a href="?page={{ page_obj.previous_page_number }}" class="page-link text-danger">&laquo; PREV PAGE </a></li>
-								{% endif %}
-								{% if page_obj.has_next %}
-								<li><a href="?page={{ page_obj.next_page_number }}" class="page-link text-danger"> NEXT PAGE &raquo;</a></li>
-
-								{% endif %}
-							  </ul>
-							  </nav>
-							</div>
-						{% endif %}
-                    </div>
 
                 </div>
                 <div class="col-lg-4">
                     <div class="sidebar_widget">
-                        <div class="single_sidebar_wiget search_form_widget">
-<!--                            <form action="#">-->
-<!--                                <div class="form-group">-->
-<!--                                    <input type="text" class="form-control" placeholder='Search Keyword'-->
-<!--                                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">-->
-<!--                                    <div class="btn_1">search</div>-->
-<!--                                </div>-->
-<!--                            </form>-->
-                        </div>
                         <div class="single_sidebar_wiget">
                             <div class="sidebar_tittle">
                                 <h3>Categories</h3>
@@ -244,7 +215,9 @@
 												<li><a href="#">WHMCS-bridge</a></li>
 												<li><a href="#">Search Domain</a></li>
 												<li><a href="#">My Account</a></li>
-												<li><a href="#">Shopping Cart</a></li>
+												{% if request.user.is_authenticated  %}
+												<li><a href="{% url 'user_favourites' %}">Favorites</a></li>
+												{% endif %}
 												<li><a href="#">Our  Main Shop</a></li>
 											</ul>
 										</div>
@@ -261,23 +234,6 @@
 
 													<div class="info"></div>
 												</form>
-											</div>
-										</div>
-									</div>
-									<div class="copyright_text">
-										<div class="row align-items-center">
-											<div class="col-lg-8">
-												<div class="copyright_part">
-													<p class="footer-text m-0">Copyright © 2019 All rights reserved <span class="px-2">|</span> This template is Made with <a href="http://colorlib.com"><i class="ti-heart"></i></a> by <a href="http://colorlib.com">Colorlib</a></p>
-												</div>
-											</div>
-											<div class="col-lg-4 text-center text-lg-right">
-												<div class="footer-social">
-													<a href="#"><i class="ti-facebook"></i></a>
-													<a href="#"> <i class="ti-twitter"></i> </a>
-													<a href="#"><i class="ti-instagram"></i></a>
-													<a href="#"><i class="ti-skype"></i></a>
-												</div>
 											</div>
 										</div>
 									</div>

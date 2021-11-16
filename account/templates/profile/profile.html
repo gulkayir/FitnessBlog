@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="section-top-border">
+				<h3 class="mb-30">{{ user.username }}</h3>
+				<div class="row">
+                        {% if user.image %}
+						    <img src="{{ user.image.url }}" alt="" class="img-fluid">
+                        {% else %}
+                            <img src="{% static 'img/defaultuser.jpeg' %}" alt="" class="img-fluid">
+                        {% endif %}
+					<div class="col-md-9 mt-sm-20">
+						<h2> {{ user.first_name }}</h2>
+						<h2> {{ user.last_name }}</h2>
+						<h2> {{ user.short_bio }}</h2>
+
+					</div>
+				</div>
+			</div>
+<form method="POST" class="w-100" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+                    <legend class="border-bottom mb-4">Update Data</legend>
+                    {{ u_form.as_p }}
+                    {{ p_form.as_p }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info">Update</button>
+                </div>
+            </form>
+
+
+
+
+{% endblock %}
