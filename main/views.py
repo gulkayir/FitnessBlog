@@ -152,7 +152,7 @@ class SearchView(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
-        time_threshold = datetime.now(timezone.utc) - timedelta(days=1)
+        time_threshold = datetime.now(timezone.utc) - timedelta(hours=1)
         context['articles'] = Article.objects.filter(created__lte=time_threshold)
         return context
 
